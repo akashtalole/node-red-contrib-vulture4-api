@@ -1,0 +1,1554 @@
+<script type="text/javascript">
+    RED.nodes.registerType('vulture4-api', {
+        category: 'function',
+        color: '#89bf04',
+        defaults: {
+            service: { value: "", type: "vulture4-api-service", required: true },
+            method: { value: "", required: true },
+            getDarwinAclByObjectId_objectId: { value: "" },
+            getDarwinAclByObjectId_objectIdType: { value: "str" },
+            putDarwinAclByObjectId_objectId: { value: "" },
+            putDarwinAclByObjectId_objectIdType: { value: "str" },
+            getDarwinFilterByObjectId_objectId: { value: "" },
+            getDarwinFilterByObjectId_objectIdType: { value: "str" },
+            getDarwinFilterByFilterTypeByResssource_filterType: { value: "" },
+            getDarwinFilterByFilterTypeByResssource_filterTypeType: { value: "str" },
+            getDarwinFilterByFilterTypeByResssource_ressource: { value: "" },
+            getDarwinFilterByFilterTypeByResssource_ressourceType: { value: "str" },
+            getDarwinPolicyByObjectId_objectId: { value: "" },
+            getDarwinPolicyByObjectId_objectIdType: { value: "str" },
+            putDarwinPolicyByObjectId_objectId: { value: "" },
+            putDarwinPolicyByObjectId_objectIdType: { value: "str" },
+            deleteDarwinPolicyByObjectId_objectId: { value: "" },
+            deleteDarwinPolicyByObjectId_objectIdType: { value: "str" },
+            postDarwinPolicyByObjectIdByAction_objectId: { value: "" },
+            postDarwinPolicyByObjectIdByAction_objectIdType: { value: "str" },
+            postDarwinPolicyByObjectIdByAction_action: { value: "" },
+            postDarwinPolicyByObjectIdByAction_actionType: { value: "str" },
+            postSystemConfigByListType_listType: { value: "" },
+            postSystemConfigByListType_listTypeType: { value: "str" },
+            getSystemNodeByObjectId_objectId: { value: "" },
+            getSystemNodeByObjectId_objectIdType: { value: "str" },
+            postSystemNodeByObjectId_objectId: { value: "" },
+            postSystemNodeByObjectId_objectIdType: { value: "str" },
+            putSystemNodeByObjectId_objectId: { value: "" },
+            putSystemNodeByObjectId_objectIdType: { value: "str" },
+            patchSystemNodeByObjectId_objectId: { value: "" },
+            patchSystemNodeByObjectId_objectIdType: { value: "str" },
+            getSystemNetaddrByObjectId_objectId: { value: "" },
+            getSystemNetaddrByObjectId_objectIdType: { value: "str" },
+            getSystemTenantsByObjectId_objectId: { value: "" },
+            getSystemTenantsByObjectId_objectIdType: { value: "str" },
+            putSystemTenantsByObjectId_objectId: { value: "" },
+            putSystemTenantsByObjectId_objectIdType: { value: "str" },
+            deleteSystemTenantsByObjectId_objectId: { value: "" },
+            deleteSystemTenantsByObjectId_objectIdType: { value: "str" },
+            getSystemVmByObjectId_objectId: { value: "" },
+            getSystemVmByObjectId_objectIdType: { value: "str" },
+            getSystemZfsByObjectId_objectId: { value: "" },
+            getSystemZfsByObjectId_objectIdType: { value: "str" },
+            postSystemZfsByObjectIdByAction_objectId: { value: "" },
+            postSystemZfsByObjectIdByAction_objectIdType: { value: "str" },
+            postSystemZfsByObjectIdByAction_action: { value: "" },
+            postSystemZfsByObjectIdByAction_actionType: { value: "str" },
+            getWorkflowByObjectId_objectId: { value: "" },
+            getWorkflowByObjectId_objectIdType: { value: "str" },
+            postWorkflowByObjectId_objectId: { value: "" },
+            postWorkflowByObjectId_objectIdType: { value: "str" },
+            deleteWorkflowByObjectId_objectId: { value: "" },
+            deleteWorkflowByObjectId_objectIdType: { value: "str" },
+            getAuthenticationIdpByObjectId_objectId: { value: "" },
+            getAuthenticationIdpByObjectId_objectIdType: { value: "str" },
+            getAuthenticationIdpByObjectId_objectType: { value: "" },
+            getAuthenticationIdpByObjectId_objectTypeType: { value: "str" },
+            getAuthenticationIdpByObjectId_groupName: { value: "" },
+            getAuthenticationIdpByObjectId_groupNameType: { value: "str" },
+            getAuthenticationIdpByObjectId_search: { value: "" },
+            getAuthenticationIdpByObjectId_searchType: { value: "str" },
+            postAuthenticationIdpUsersByObjectId_objectId: { value: "" },
+            postAuthenticationIdpUsersByObjectId_objectIdType: { value: "str" },
+            putAuthenticationIdpUsersByObjectId_objectId: { value: "" },
+            putAuthenticationIdpUsersByObjectId_objectIdType: { value: "str" },
+            deleteAuthenticationIdpUsersByObjectId_objectId: { value: "" },
+            deleteAuthenticationIdpUsersByObjectId_objectIdType: { value: "str" },
+            postAuthenticationIdpGroupsByObjectId_objectId: { value: "" },
+            postAuthenticationIdpGroupsByObjectId_objectIdType: { value: "str" },
+            name: { value: "" }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: 'icon.png',
+        label: function () {
+            return this.name || this.method || "vulture4-api";
+        },
+        labelStyle: function() {
+            return this.name?"node_label_italic":"";
+        },
+        oneditprepare: function () {
+            var selectedMethod = $('#node-input-method option:selected');
+            if (!selectedMethod.val()) {
+                var methods = $('#node-input-method').children();
+                var firstMethod = methods.first();
+                $('#node-input-method').val(firstMethod.val());
+            }
+
+            var showParameters = function () {
+
+                $("#node-input-getDarwinAclByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-getDarwinAclByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#getDarwinAclByObjectId_objectId").hide();
+
+                $("#node-input-putDarwinAclByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-putDarwinAclByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#putDarwinAclByObjectId_objectId").hide();
+
+                $("#node-input-getDarwinFilterByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-getDarwinFilterByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#getDarwinFilterByObjectId_objectId").hide();
+
+
+                $("#getDarwinFilterByFilterTypeByResssource_filterType").hide();
+
+
+                $("#getDarwinFilterByFilterTypeByResssource_ressource").hide();
+
+                $("#node-input-getDarwinPolicyByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-getDarwinPolicyByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#getDarwinPolicyByObjectId_objectId").hide();
+
+                $("#node-input-putDarwinPolicyByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-putDarwinPolicyByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#putDarwinPolicyByObjectId_objectId").hide();
+
+                $("#node-input-deleteDarwinPolicyByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-deleteDarwinPolicyByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#deleteDarwinPolicyByObjectId_objectId").hide();
+
+                $("#node-input-postDarwinPolicyByObjectIdByAction_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-postDarwinPolicyByObjectIdByAction_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#postDarwinPolicyByObjectIdByAction_objectId").hide();
+
+
+                $("#postDarwinPolicyByObjectIdByAction_action").hide();
+
+
+                $("#postSystemConfigByListType_listType").hide();
+
+                $("#node-input-getSystemNodeByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-getSystemNodeByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#getSystemNodeByObjectId_objectId").hide();
+
+                $("#node-input-postSystemNodeByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-postSystemNodeByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#postSystemNodeByObjectId_objectId").hide();
+
+                $("#node-input-putSystemNodeByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-putSystemNodeByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#putSystemNodeByObjectId_objectId").hide();
+
+                $("#node-input-patchSystemNodeByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-patchSystemNodeByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#patchSystemNodeByObjectId_objectId").hide();
+
+                $("#node-input-getSystemNetaddrByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-getSystemNetaddrByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#getSystemNetaddrByObjectId_objectId").hide();
+
+                $("#node-input-getSystemTenantsByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-getSystemTenantsByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#getSystemTenantsByObjectId_objectId").hide();
+
+                $("#node-input-putSystemTenantsByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-putSystemTenantsByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#putSystemTenantsByObjectId_objectId").hide();
+
+                $("#node-input-deleteSystemTenantsByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-deleteSystemTenantsByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#deleteSystemTenantsByObjectId_objectId").hide();
+
+                $("#node-input-getSystemVmByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-getSystemVmByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#getSystemVmByObjectId_objectId").hide();
+
+                $("#node-input-getSystemZfsByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-getSystemZfsByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#getSystemZfsByObjectId_objectId").hide();
+
+                $("#node-input-postSystemZfsByObjectIdByAction_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-postSystemZfsByObjectIdByAction_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#postSystemZfsByObjectIdByAction_objectId").hide();
+
+
+                $("#postSystemZfsByObjectIdByAction_action").hide();
+
+                $("#node-input-getWorkflowByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-getWorkflowByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#getWorkflowByObjectId_objectId").hide();
+
+                $("#node-input-postWorkflowByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-postWorkflowByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#postWorkflowByObjectId_objectId").hide();
+
+                $("#node-input-deleteWorkflowByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-deleteWorkflowByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#deleteWorkflowByObjectId_objectId").hide();
+
+                $("#node-input-getAuthenticationIdpByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-getAuthenticationIdpByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#getAuthenticationIdpByObjectId_objectId").hide();
+
+
+                $("#getAuthenticationIdpByObjectId_objectType").hide();
+
+                $("#node-input-getAuthenticationIdpByObjectId_groupName").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-getAuthenticationIdpByObjectId_groupNameType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#getAuthenticationIdpByObjectId_groupName").hide();
+
+                $("#node-input-getAuthenticationIdpByObjectId_search").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-getAuthenticationIdpByObjectId_searchType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#getAuthenticationIdpByObjectId_search").hide();
+
+                $("#node-input-postAuthenticationIdpUsersByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-postAuthenticationIdpUsersByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#postAuthenticationIdpUsersByObjectId_objectId").hide();
+
+                $("#node-input-putAuthenticationIdpUsersByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-putAuthenticationIdpUsersByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#putAuthenticationIdpUsersByObjectId_objectId").hide();
+
+                $("#node-input-deleteAuthenticationIdpUsersByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-deleteAuthenticationIdpUsersByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#deleteAuthenticationIdpUsersByObjectId_objectId").hide();
+
+                $("#node-input-postAuthenticationIdpGroupsByObjectId_objectId").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-postAuthenticationIdpGroupsByObjectId_objectIdType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#postAuthenticationIdpGroupsByObjectId_objectId").hide();
+
+                $("#optional-parameters").hide();
+                $("#optional-parameters-label").hide();
+                if ($("#node-input-method").val() === 'getDarwinAcl') {
+
+                }
+                if ($("#node-input-method").val() === 'postDarwinAcl') {
+
+                }
+                if ($("#node-input-method").val() === 'getDarwinAclByObjectId') {
+
+                }
+                if ($("#node-input-method").val() === 'putDarwinAclByObjectId') {
+
+                }
+                if ($("#node-input-method").val() === 'getDarwinFilter') {
+
+                }
+                if ($("#node-input-method").val() === 'getDarwinFilterByObjectId') {
+
+                }
+                if ($("#node-input-method").val() === 'getDarwinFilterTypes') {
+
+                }
+                if ($("#node-input-method").val() === 'getDarwinFilterByFilterTypeByResssource') {
+
+                }
+                if ($("#node-input-method").val() === 'getDarwinPolicy') {
+
+                }
+                if ($("#node-input-method").val() === 'postDarwinPolicy') {
+
+                }
+                if ($("#node-input-method").val() === 'getDarwinPolicyByObjectId') {
+
+                }
+                if ($("#node-input-method").val() === 'putDarwinPolicyByObjectId') {
+
+                }
+                if ($("#node-input-method").val() === 'deleteDarwinPolicyByObjectId') {
+
+                }
+                if ($("#node-input-method").val() === 'postDarwinPolicyByObjectIdByAction') {
+
+                }
+                if ($("#node-input-method").val() === 'getSystemConfig') {
+
+                }
+                if ($("#node-input-method").val() === 'putSystemConfig') {
+
+                }
+                if ($("#node-input-method").val() === 'postSystemConfigByListType') {
+
+                }
+                if ($("#node-input-method").val() === 'getSystemNode') {
+
+                }
+                if ($("#node-input-method").val() === 'getSystemNodeByObjectId') {
+
+                }
+                if ($("#node-input-method").val() === 'postSystemNodeByObjectId') {
+
+                }
+                if ($("#node-input-method").val() === 'putSystemNodeByObjectId') {
+
+                }
+                if ($("#node-input-method").val() === 'patchSystemNodeByObjectId') {
+
+                }
+                if ($("#node-input-method").val() === 'getSystemCluster') {
+
+                }
+                if ($("#node-input-method").val() === 'getSystemNetif') {
+
+                }
+                if ($("#node-input-method").val() === 'postSystemNetifRefresh') {
+
+                }
+                if ($("#node-input-method").val() === 'getSystemNetaddr') {
+
+                }
+                if ($("#node-input-method").val() === 'getSystemNetaddrByObjectId') {
+
+                }
+                if ($("#node-input-method").val() === 'getSystemPkiGetCa') {
+
+                }
+                if ($("#node-input-method").val() === 'getSystemPkiGetCert') {
+
+                }
+                if ($("#node-input-method").val() === 'getSystemTenants') {
+
+                }
+                if ($("#node-input-method").val() === 'postSystemTenants') {
+
+                }
+                if ($("#node-input-method").val() === 'getSystemTenantsByObjectId') {
+
+                }
+                if ($("#node-input-method").val() === 'putSystemTenantsByObjectId') {
+
+                }
+                if ($("#node-input-method").val() === 'deleteSystemTenantsByObjectId') {
+
+                }
+                if ($("#node-input-method").val() === 'getSystemVm') {
+
+                }
+                if ($("#node-input-method").val() === 'getSystemVmByObjectId') {
+
+                }
+                if ($("#node-input-method").val() === 'getSystemZfs') {
+
+                }
+                if ($("#node-input-method").val() === 'getSystemZfsByObjectId') {
+
+                }
+                if ($("#node-input-method").val() === 'postSystemZfsByObjectIdByAction') {
+
+                }
+                if ($("#node-input-method").val() === 'getWorkflow') {
+
+                }
+                if ($("#node-input-method").val() === 'postWorkflow') {
+
+                }
+                if ($("#node-input-method").val() === 'getWorkflowByObjectId') {
+
+                }
+                if ($("#node-input-method").val() === 'postWorkflowByObjectId') {
+
+                }
+                if ($("#node-input-method").val() === 'deleteWorkflowByObjectId') {
+
+                }
+                if ($("#node-input-method").val() === 'getAuthenticationIdpByObjectId') {
+
+                    $("#optional-parameters").show();
+                    $("#optional-parameters-label").show();
+                    
+                }
+                if ($("#node-input-method").val() === 'postAuthenticationIdpUsersByObjectId') {
+
+                }
+                if ($("#node-input-method").val() === 'putAuthenticationIdpUsersByObjectId') {
+
+                }
+                if ($("#node-input-method").val() === 'deleteAuthenticationIdpUsersByObjectId') {
+
+                }
+                if ($("#node-input-method").val() === 'postAuthenticationIdpGroupsByObjectId') {
+
+                }
+
+                if ($("#optional-parameters").prop('checked')) {
+                    if ($("#node-input-method").val() === 'getDarwinAcl') {
+
+                    }
+                    if ($("#node-input-method").val() === 'postDarwinAcl') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getDarwinAclByObjectId') {
+
+                        $("#getDarwinAclByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'putDarwinAclByObjectId') {
+
+                        $("#putDarwinAclByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'getDarwinFilter') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getDarwinFilterByObjectId') {
+
+                        $("#getDarwinFilterByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'getDarwinFilterTypes') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getDarwinFilterByFilterTypeByResssource') {
+
+                        $("#getDarwinFilterByFilterTypeByResssource_filterType").show();
+                        
+                        $("#getDarwinFilterByFilterTypeByResssource_ressource").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'getDarwinPolicy') {
+
+                    }
+                    if ($("#node-input-method").val() === 'postDarwinPolicy') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getDarwinPolicyByObjectId') {
+
+                        $("#getDarwinPolicyByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'putDarwinPolicyByObjectId') {
+
+                        $("#putDarwinPolicyByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'deleteDarwinPolicyByObjectId') {
+
+                        $("#deleteDarwinPolicyByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'postDarwinPolicyByObjectIdByAction') {
+
+                        $("#postDarwinPolicyByObjectIdByAction_objectId").show();
+                        
+                        $("#postDarwinPolicyByObjectIdByAction_action").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'getSystemConfig') {
+
+                    }
+                    if ($("#node-input-method").val() === 'putSystemConfig') {
+
+                    }
+                    if ($("#node-input-method").val() === 'postSystemConfigByListType') {
+
+                        $("#postSystemConfigByListType_listType").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'getSystemNode') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getSystemNodeByObjectId') {
+
+                        $("#getSystemNodeByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'postSystemNodeByObjectId') {
+
+                        $("#postSystemNodeByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'putSystemNodeByObjectId') {
+
+                        $("#putSystemNodeByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'patchSystemNodeByObjectId') {
+
+                        $("#patchSystemNodeByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'getSystemCluster') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getSystemNetif') {
+
+                    }
+                    if ($("#node-input-method").val() === 'postSystemNetifRefresh') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getSystemNetaddr') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getSystemNetaddrByObjectId') {
+
+                        $("#getSystemNetaddrByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'getSystemPkiGetCa') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getSystemPkiGetCert') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getSystemTenants') {
+
+                    }
+                    if ($("#node-input-method").val() === 'postSystemTenants') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getSystemTenantsByObjectId') {
+
+                        $("#getSystemTenantsByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'putSystemTenantsByObjectId') {
+
+                        $("#putSystemTenantsByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'deleteSystemTenantsByObjectId') {
+
+                        $("#deleteSystemTenantsByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'getSystemVm') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getSystemVmByObjectId') {
+
+                        $("#getSystemVmByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'getSystemZfs') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getSystemZfsByObjectId') {
+
+                        $("#getSystemZfsByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'postSystemZfsByObjectIdByAction') {
+
+                        $("#postSystemZfsByObjectIdByAction_objectId").show();
+                        
+                        $("#postSystemZfsByObjectIdByAction_action").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'getWorkflow') {
+
+                    }
+                    if ($("#node-input-method").val() === 'postWorkflow') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getWorkflowByObjectId') {
+
+                        $("#getWorkflowByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'postWorkflowByObjectId') {
+
+                        $("#postWorkflowByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'deleteWorkflowByObjectId') {
+
+                        $("#deleteWorkflowByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'getAuthenticationIdpByObjectId') {
+
+                        $("#getAuthenticationIdpByObjectId_objectId").show();
+                        
+                        $("#getAuthenticationIdpByObjectId_objectType").show();
+                        
+                        $("#getAuthenticationIdpByObjectId_groupName").show();
+                        
+                        $("#getAuthenticationIdpByObjectId_search").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'postAuthenticationIdpUsersByObjectId') {
+
+                        $("#postAuthenticationIdpUsersByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'putAuthenticationIdpUsersByObjectId') {
+
+                        $("#putAuthenticationIdpUsersByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'deleteAuthenticationIdpUsersByObjectId') {
+
+                        $("#deleteAuthenticationIdpUsersByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'postAuthenticationIdpGroupsByObjectId') {
+
+                        $("#postAuthenticationIdpGroupsByObjectId_objectId").show();
+                        
+                    }
+                } else {
+                    if ($("#node-input-method").val() === 'getDarwinAcl') {
+
+                    }
+                    if ($("#node-input-method").val() === 'postDarwinAcl') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getDarwinAclByObjectId') {
+
+                        $("#getDarwinAclByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'putDarwinAclByObjectId') {
+
+                        $("#putDarwinAclByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'getDarwinFilter') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getDarwinFilterByObjectId') {
+
+                        $("#getDarwinFilterByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'getDarwinFilterTypes') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getDarwinFilterByFilterTypeByResssource') {
+
+                        $("#getDarwinFilterByFilterTypeByResssource_filterType").show();
+                        
+                        $("#getDarwinFilterByFilterTypeByResssource_ressource").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'getDarwinPolicy') {
+
+                    }
+                    if ($("#node-input-method").val() === 'postDarwinPolicy') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getDarwinPolicyByObjectId') {
+
+                        $("#getDarwinPolicyByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'putDarwinPolicyByObjectId') {
+
+                        $("#putDarwinPolicyByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'deleteDarwinPolicyByObjectId') {
+
+                        $("#deleteDarwinPolicyByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'postDarwinPolicyByObjectIdByAction') {
+
+                        $("#postDarwinPolicyByObjectIdByAction_objectId").show();
+                        
+                        $("#postDarwinPolicyByObjectIdByAction_action").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'getSystemConfig') {
+
+                    }
+                    if ($("#node-input-method").val() === 'putSystemConfig') {
+
+                    }
+                    if ($("#node-input-method").val() === 'postSystemConfigByListType') {
+
+                        $("#postSystemConfigByListType_listType").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'getSystemNode') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getSystemNodeByObjectId') {
+
+                        $("#getSystemNodeByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'postSystemNodeByObjectId') {
+
+                        $("#postSystemNodeByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'putSystemNodeByObjectId') {
+
+                        $("#putSystemNodeByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'patchSystemNodeByObjectId') {
+
+                        $("#patchSystemNodeByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'getSystemCluster') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getSystemNetif') {
+
+                    }
+                    if ($("#node-input-method").val() === 'postSystemNetifRefresh') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getSystemNetaddr') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getSystemNetaddrByObjectId') {
+
+                        $("#getSystemNetaddrByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'getSystemPkiGetCa') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getSystemPkiGetCert') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getSystemTenants') {
+
+                    }
+                    if ($("#node-input-method").val() === 'postSystemTenants') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getSystemTenantsByObjectId') {
+
+                        $("#getSystemTenantsByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'putSystemTenantsByObjectId') {
+
+                        $("#putSystemTenantsByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'deleteSystemTenantsByObjectId') {
+
+                        $("#deleteSystemTenantsByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'getSystemVm') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getSystemVmByObjectId') {
+
+                        $("#getSystemVmByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'getSystemZfs') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getSystemZfsByObjectId') {
+
+                        $("#getSystemZfsByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'postSystemZfsByObjectIdByAction') {
+
+                        $("#postSystemZfsByObjectIdByAction_objectId").show();
+                        
+                        $("#postSystemZfsByObjectIdByAction_action").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'getWorkflow') {
+
+                    }
+                    if ($("#node-input-method").val() === 'postWorkflow') {
+
+                    }
+                    if ($("#node-input-method").val() === 'getWorkflowByObjectId') {
+
+                        $("#getWorkflowByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'postWorkflowByObjectId') {
+
+                        $("#postWorkflowByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'deleteWorkflowByObjectId') {
+
+                        $("#deleteWorkflowByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'getAuthenticationIdpByObjectId') {
+
+                        $("#getAuthenticationIdpByObjectId_objectId").show();
+                        
+                        $("#getAuthenticationIdpByObjectId_objectType").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'postAuthenticationIdpUsersByObjectId') {
+
+                        $("#postAuthenticationIdpUsersByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'putAuthenticationIdpUsersByObjectId') {
+
+                        $("#putAuthenticationIdpUsersByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'deleteAuthenticationIdpUsersByObjectId') {
+
+                        $("#deleteAuthenticationIdpUsersByObjectId_objectId").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'postAuthenticationIdpGroupsByObjectId') {
+
+                        $("#postAuthenticationIdpGroupsByObjectId_objectId").show();
+                        
+                    }
+                }
+            };
+
+            $("#node-input-method").change(function () {
+                showParameters();
+            });
+
+            $("#optional-parameters").change(function () {
+                showParameters();
+            });
+
+            var selected_getDarwinFilterByFilterTypeByResssource_filterType = $('#node-input-getDarwinFilterByFilterTypeByResssource_filterType option:selected');
+            if (!selected_getDarwinFilterByFilterTypeByResssource_filterType.val()) {
+                var children_getDarwinFilterByFilterTypeByResssource_filterType = $('#node-input-getDarwinFilterByFilterTypeByResssource_filterType').children();
+                var first_getDarwinFilterByFilterTypeByResssource_filterType = children_getDarwinFilterByFilterTypeByResssource_filterType.first();
+                $('#node-input-getDarwinFilterByFilterTypeByResssource_filterType').val(first_getDarwinFilterByFilterTypeByResssource_filterType.val());
+            }
+            var selected_getDarwinFilterByFilterTypeByResssource_ressource = $('#node-input-getDarwinFilterByFilterTypeByResssource_ressource option:selected');
+            if (!selected_getDarwinFilterByFilterTypeByResssource_ressource.val()) {
+                var children_getDarwinFilterByFilterTypeByResssource_ressource = $('#node-input-getDarwinFilterByFilterTypeByResssource_ressource').children();
+                var first_getDarwinFilterByFilterTypeByResssource_ressource = children_getDarwinFilterByFilterTypeByResssource_ressource.first();
+                $('#node-input-getDarwinFilterByFilterTypeByResssource_ressource').val(first_getDarwinFilterByFilterTypeByResssource_ressource.val());
+            }
+            var selected_postDarwinPolicyByObjectIdByAction_action = $('#node-input-postDarwinPolicyByObjectIdByAction_action option:selected');
+            if (!selected_postDarwinPolicyByObjectIdByAction_action.val()) {
+                var children_postDarwinPolicyByObjectIdByAction_action = $('#node-input-postDarwinPolicyByObjectIdByAction_action').children();
+                var first_postDarwinPolicyByObjectIdByAction_action = children_postDarwinPolicyByObjectIdByAction_action.first();
+                $('#node-input-postDarwinPolicyByObjectIdByAction_action').val(first_postDarwinPolicyByObjectIdByAction_action.val());
+            }
+            var selected_postSystemConfigByListType_listType = $('#node-input-postSystemConfigByListType_listType option:selected');
+            if (!selected_postSystemConfigByListType_listType.val()) {
+                var children_postSystemConfigByListType_listType = $('#node-input-postSystemConfigByListType_listType').children();
+                var first_postSystemConfigByListType_listType = children_postSystemConfigByListType_listType.first();
+                $('#node-input-postSystemConfigByListType_listType').val(first_postSystemConfigByListType_listType.val());
+            }
+            var selected_postSystemZfsByObjectIdByAction_action = $('#node-input-postSystemZfsByObjectIdByAction_action option:selected');
+            if (!selected_postSystemZfsByObjectIdByAction_action.val()) {
+                var children_postSystemZfsByObjectIdByAction_action = $('#node-input-postSystemZfsByObjectIdByAction_action').children();
+                var first_postSystemZfsByObjectIdByAction_action = children_postSystemZfsByObjectIdByAction_action.first();
+                $('#node-input-postSystemZfsByObjectIdByAction_action').val(first_postSystemZfsByObjectIdByAction_action.val());
+            }
+            var selected_getAuthenticationIdpByObjectId_objectType = $('#node-input-getAuthenticationIdpByObjectId_objectType option:selected');
+            if (!selected_getAuthenticationIdpByObjectId_objectType.val()) {
+                var children_getAuthenticationIdpByObjectId_objectType = $('#node-input-getAuthenticationIdpByObjectId_objectType').children();
+                var first_getAuthenticationIdpByObjectId_objectType = children_getAuthenticationIdpByObjectId_objectType.first();
+                $('#node-input-getAuthenticationIdpByObjectId_objectType').val(first_getAuthenticationIdpByObjectId_objectType.val());
+            }
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="vulture4-api">
+    <div class="form-row">
+        <label for="node-input-service"><i class="fa fa-cloud"></i> <span data-i18n="Vulture4Api.label.service"></span></label>
+        <input type="text" id="node-input-service">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-method"><i class="fa fa-tasks"></i> <span data-i18n="Vulture4Api.label.method"></span></label>
+        <select id="node-input-method">
+            <option value="getDarwinAcl" data-i18n="Vulture4Api.parameters.getDarwinAcl"></option>
+            <option value="postDarwinAcl" data-i18n="Vulture4Api.parameters.postDarwinAcl"></option>
+            <option value="getDarwinAclByObjectId" data-i18n="Vulture4Api.parameters.getDarwinAclByObjectId"></option>
+            <option value="putDarwinAclByObjectId" data-i18n="Vulture4Api.parameters.putDarwinAclByObjectId"></option>
+            <option value="getDarwinFilter" data-i18n="Vulture4Api.parameters.getDarwinFilter"></option>
+            <option value="getDarwinFilterByObjectId" data-i18n="Vulture4Api.parameters.getDarwinFilterByObjectId"></option>
+            <option value="getDarwinFilterTypes" data-i18n="Vulture4Api.parameters.getDarwinFilterTypes"></option>
+            <option value="getDarwinFilterByFilterTypeByResssource" data-i18n="Vulture4Api.parameters.getDarwinFilterByFilterTypeByResssource"></option>
+            <option value="getDarwinPolicy" data-i18n="Vulture4Api.parameters.getDarwinPolicy"></option>
+            <option value="postDarwinPolicy" data-i18n="Vulture4Api.parameters.postDarwinPolicy"></option>
+            <option value="getDarwinPolicyByObjectId" data-i18n="Vulture4Api.parameters.getDarwinPolicyByObjectId"></option>
+            <option value="putDarwinPolicyByObjectId" data-i18n="Vulture4Api.parameters.putDarwinPolicyByObjectId"></option>
+            <option value="deleteDarwinPolicyByObjectId" data-i18n="Vulture4Api.parameters.deleteDarwinPolicyByObjectId"></option>
+            <option value="postDarwinPolicyByObjectIdByAction" data-i18n="Vulture4Api.parameters.postDarwinPolicyByObjectIdByAction"></option>
+            <option value="getSystemConfig" data-i18n="Vulture4Api.parameters.getSystemConfig"></option>
+            <option value="putSystemConfig" data-i18n="Vulture4Api.parameters.putSystemConfig"></option>
+            <option value="postSystemConfigByListType" data-i18n="Vulture4Api.parameters.postSystemConfigByListType"></option>
+            <option value="getSystemNode" data-i18n="Vulture4Api.parameters.getSystemNode"></option>
+            <option value="getSystemNodeByObjectId" data-i18n="Vulture4Api.parameters.getSystemNodeByObjectId"></option>
+            <option value="postSystemNodeByObjectId" data-i18n="Vulture4Api.parameters.postSystemNodeByObjectId"></option>
+            <option value="putSystemNodeByObjectId" data-i18n="Vulture4Api.parameters.putSystemNodeByObjectId"></option>
+            <option value="patchSystemNodeByObjectId" data-i18n="Vulture4Api.parameters.patchSystemNodeByObjectId"></option>
+            <option value="getSystemCluster" data-i18n="Vulture4Api.parameters.getSystemCluster"></option>
+            <option value="getSystemNetif" data-i18n="Vulture4Api.parameters.getSystemNetif"></option>
+            <option value="postSystemNetifRefresh" data-i18n="Vulture4Api.parameters.postSystemNetifRefresh"></option>
+            <option value="getSystemNetaddr" data-i18n="Vulture4Api.parameters.getSystemNetaddr"></option>
+            <option value="getSystemNetaddrByObjectId" data-i18n="Vulture4Api.parameters.getSystemNetaddrByObjectId"></option>
+            <option value="getSystemPkiGetCa" data-i18n="Vulture4Api.parameters.getSystemPkiGetCa"></option>
+            <option value="getSystemPkiGetCert" data-i18n="Vulture4Api.parameters.getSystemPkiGetCert"></option>
+            <option value="getSystemTenants" data-i18n="Vulture4Api.parameters.getSystemTenants"></option>
+            <option value="postSystemTenants" data-i18n="Vulture4Api.parameters.postSystemTenants"></option>
+            <option value="getSystemTenantsByObjectId" data-i18n="Vulture4Api.parameters.getSystemTenantsByObjectId"></option>
+            <option value="putSystemTenantsByObjectId" data-i18n="Vulture4Api.parameters.putSystemTenantsByObjectId"></option>
+            <option value="deleteSystemTenantsByObjectId" data-i18n="Vulture4Api.parameters.deleteSystemTenantsByObjectId"></option>
+            <option value="getSystemVm" data-i18n="Vulture4Api.parameters.getSystemVm"></option>
+            <option value="getSystemVmByObjectId" data-i18n="Vulture4Api.parameters.getSystemVmByObjectId"></option>
+            <option value="getSystemZfs" data-i18n="Vulture4Api.parameters.getSystemZfs"></option>
+            <option value="getSystemZfsByObjectId" data-i18n="Vulture4Api.parameters.getSystemZfsByObjectId"></option>
+            <option value="postSystemZfsByObjectIdByAction" data-i18n="Vulture4Api.parameters.postSystemZfsByObjectIdByAction"></option>
+            <option value="getWorkflow" data-i18n="Vulture4Api.parameters.getWorkflow"></option>
+            <option value="postWorkflow" data-i18n="Vulture4Api.parameters.postWorkflow"></option>
+            <option value="getWorkflowByObjectId" data-i18n="Vulture4Api.parameters.getWorkflowByObjectId"></option>
+            <option value="postWorkflowByObjectId" data-i18n="Vulture4Api.parameters.postWorkflowByObjectId"></option>
+            <option value="deleteWorkflowByObjectId" data-i18n="Vulture4Api.parameters.deleteWorkflowByObjectId"></option>
+            <option value="getAuthenticationIdpByObjectId" data-i18n="Vulture4Api.parameters.getAuthenticationIdpByObjectId"></option>
+            <option value="postAuthenticationIdpUsersByObjectId" data-i18n="Vulture4Api.parameters.postAuthenticationIdpUsersByObjectId"></option>
+            <option value="putAuthenticationIdpUsersByObjectId" data-i18n="Vulture4Api.parameters.putAuthenticationIdpUsersByObjectId"></option>
+            <option value="deleteAuthenticationIdpUsersByObjectId" data-i18n="Vulture4Api.parameters.deleteAuthenticationIdpUsersByObjectId"></option>
+            <option value="postAuthenticationIdpGroupsByObjectId" data-i18n="Vulture4Api.parameters.postAuthenticationIdpGroupsByObjectId"></option>
+        </select>
+        &nbsp;
+        <input type="checkbox" id="optional-parameters" style="margin-left: 10px; vertical-align: text-bottom; width: auto;">
+        <label for="optional-parameters" id="optional-parameters-label" style="width: auto;"> <span data-i18n="Vulture4Api.parameters.optionalParameters"></span></label>
+    </div>
+
+    <div class="form-row" id="getDarwinAclByObjectId_objectId">
+        <label for="node-input-getDarwinAclByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-getDarwinAclByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-getDarwinAclByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="putDarwinAclByObjectId_objectId">
+        <label for="node-input-putDarwinAclByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-putDarwinAclByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-putDarwinAclByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="getDarwinFilterByObjectId_objectId">
+        <label for="node-input-getDarwinFilterByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-getDarwinFilterByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-getDarwinFilterByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="getDarwinFilterByFilterTypeByResssource_filterType">
+        <label for="node-input-getDarwinFilterByFilterTypeByResssource_filterType"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.filterType"></span></label>
+        <select id="node-input-getDarwinFilterByFilterTypeByResssource_filterType">
+        </select>
+
+    </div>
+
+    <div class="form-row" id="getDarwinFilterByFilterTypeByResssource_ressource">
+        <label for="node-input-getDarwinFilterByFilterTypeByResssource_ressource"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.ressource"></span></label>
+        <select id="node-input-getDarwinFilterByFilterTypeByResssource_ressource">
+        </select>
+
+    </div>
+
+    <div class="form-row" id="getDarwinPolicyByObjectId_objectId">
+        <label for="node-input-getDarwinPolicyByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-getDarwinPolicyByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-getDarwinPolicyByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="putDarwinPolicyByObjectId_objectId">
+        <label for="node-input-putDarwinPolicyByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-putDarwinPolicyByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-putDarwinPolicyByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="deleteDarwinPolicyByObjectId_objectId">
+        <label for="node-input-deleteDarwinPolicyByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-deleteDarwinPolicyByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-deleteDarwinPolicyByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="postDarwinPolicyByObjectIdByAction_objectId">
+        <label for="node-input-postDarwinPolicyByObjectIdByAction_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-postDarwinPolicyByObjectIdByAction_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-postDarwinPolicyByObjectIdByAction_objectIdType">
+    </div>
+
+    <div class="form-row" id="postDarwinPolicyByObjectIdByAction_action">
+        <label for="node-input-postDarwinPolicyByObjectIdByAction_action"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.action"></span></label>
+        <select id="node-input-postDarwinPolicyByObjectIdByAction_action">
+        </select>
+
+    </div>
+
+    <div class="form-row" id="postSystemConfigByListType_listType">
+        <label for="node-input-postSystemConfigByListType_listType"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.listType"></span></label>
+        <select id="node-input-postSystemConfigByListType_listType">
+        </select>
+
+    </div>
+
+    <div class="form-row" id="getSystemNodeByObjectId_objectId">
+        <label for="node-input-getSystemNodeByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-getSystemNodeByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-getSystemNodeByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="postSystemNodeByObjectId_objectId">
+        <label for="node-input-postSystemNodeByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-postSystemNodeByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-postSystemNodeByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="putSystemNodeByObjectId_objectId">
+        <label for="node-input-putSystemNodeByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-putSystemNodeByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-putSystemNodeByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="patchSystemNodeByObjectId_objectId">
+        <label for="node-input-patchSystemNodeByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-patchSystemNodeByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-patchSystemNodeByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="getSystemNetaddrByObjectId_objectId">
+        <label for="node-input-getSystemNetaddrByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-getSystemNetaddrByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-getSystemNetaddrByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="getSystemTenantsByObjectId_objectId">
+        <label for="node-input-getSystemTenantsByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-getSystemTenantsByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-getSystemTenantsByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="putSystemTenantsByObjectId_objectId">
+        <label for="node-input-putSystemTenantsByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-putSystemTenantsByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-putSystemTenantsByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="deleteSystemTenantsByObjectId_objectId">
+        <label for="node-input-deleteSystemTenantsByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-deleteSystemTenantsByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-deleteSystemTenantsByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="getSystemVmByObjectId_objectId">
+        <label for="node-input-getSystemVmByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-getSystemVmByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-getSystemVmByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="getSystemZfsByObjectId_objectId">
+        <label for="node-input-getSystemZfsByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-getSystemZfsByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-getSystemZfsByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="postSystemZfsByObjectIdByAction_objectId">
+        <label for="node-input-postSystemZfsByObjectIdByAction_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-postSystemZfsByObjectIdByAction_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-postSystemZfsByObjectIdByAction_objectIdType">
+    </div>
+
+    <div class="form-row" id="postSystemZfsByObjectIdByAction_action">
+        <label for="node-input-postSystemZfsByObjectIdByAction_action"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.action"></span></label>
+        <select id="node-input-postSystemZfsByObjectIdByAction_action">
+        </select>
+
+    </div>
+
+    <div class="form-row" id="getWorkflowByObjectId_objectId">
+        <label for="node-input-getWorkflowByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-getWorkflowByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-getWorkflowByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="postWorkflowByObjectId_objectId">
+        <label for="node-input-postWorkflowByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-postWorkflowByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-postWorkflowByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="deleteWorkflowByObjectId_objectId">
+        <label for="node-input-deleteWorkflowByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-deleteWorkflowByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-deleteWorkflowByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="getAuthenticationIdpByObjectId_objectId">
+        <label for="node-input-getAuthenticationIdpByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-getAuthenticationIdpByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-getAuthenticationIdpByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="getAuthenticationIdpByObjectId_objectType">
+        <label for="node-input-getAuthenticationIdpByObjectId_objectType"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectType"></span></label>
+        <select id="node-input-getAuthenticationIdpByObjectId_objectType">
+        </select>
+
+    </div>
+
+    <div class="form-row" id="getAuthenticationIdpByObjectId_groupName">
+        <label for="node-input-getAuthenticationIdpByObjectId_groupName"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.groupName"></span></label>
+
+        <input type="text" id="node-input-getAuthenticationIdpByObjectId_groupName" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-getAuthenticationIdpByObjectId_groupNameType">
+    </div>
+
+    <div class="form-row" id="getAuthenticationIdpByObjectId_search">
+        <label for="node-input-getAuthenticationIdpByObjectId_search"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.search"></span></label>
+
+        <input type="text" id="node-input-getAuthenticationIdpByObjectId_search" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-getAuthenticationIdpByObjectId_searchType">
+    </div>
+
+    <div class="form-row" id="postAuthenticationIdpUsersByObjectId_objectId">
+        <label for="node-input-postAuthenticationIdpUsersByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-postAuthenticationIdpUsersByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-postAuthenticationIdpUsersByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="putAuthenticationIdpUsersByObjectId_objectId">
+        <label for="node-input-putAuthenticationIdpUsersByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-putAuthenticationIdpUsersByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-putAuthenticationIdpUsersByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="deleteAuthenticationIdpUsersByObjectId_objectId">
+        <label for="node-input-deleteAuthenticationIdpUsersByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-deleteAuthenticationIdpUsersByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-deleteAuthenticationIdpUsersByObjectId_objectIdType">
+    </div>
+
+    <div class="form-row" id="postAuthenticationIdpGroupsByObjectId_objectId">
+        <label for="node-input-postAuthenticationIdpGroupsByObjectId_objectId"><i class="fa fa-list"></i> <span data-i18n="Vulture4Api.parameters.objectId"></span></label>
+
+        <input type="text" id="node-input-postAuthenticationIdpGroupsByObjectId_objectId" placeholder="" style="width:70%">
+        <input type="hidden" id="node-input-postAuthenticationIdpGroupsByObjectId_objectIdType">
+    </div>
+
+    <hr/>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]node-red:common.label.name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="vulture4-api">
+
+    <p></p>
+    <p><b>Methods</b></p>
+        <h3>GET /darwin/acl/</h3>
+        <p>List of Access Control</p>
+        <dl class="message-properties">
+        </dl>
+        <h3>POST /darwin/acl/</h3>
+        <p>Create an Access Control</p>
+        <dl class="message-properties">
+        </dl>
+        <h3>GET /darwin/acl/{object_id}</h3>
+        <p>Access Control</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+        <h3>PUT /darwin/acl/{object_id}</h3>
+        <p>Edit an Access Control</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+        <h3>GET /darwin/filter/</h3>
+        <p>List filter instances</p>
+        <dl class="message-properties">
+        </dl>
+        <h3>GET /darwin/filter/{object_id}/</h3>
+        <p>Get specific filter instance</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+        <h3>GET /darwin/filter/types/</h3>
+        <p>List filter types</p>
+        <dl class="message-properties">
+        </dl>
+        <h3>GET /darwin/filter/{filter_type}/{resssource}</h3>
+        <p>List available ressources for a specific filter type</p>
+        <dl class="message-properties">
+        <dt>filter_type <span class="property-type"></span></dt>
+        <dt>ressource <span class="property-type"></span></dt>
+        </dl>
+        <h3>GET /darwin/policy/</h3>
+        <p>List policies</p>
+        <dl class="message-properties">
+        </dl>
+        <h3>POST /darwin/policy/</h3>
+        <p>Create policy</p>
+        <dl class="message-properties">
+        </dl>
+        <h3>GET /darwin/policy/{object_id}/</h3>
+        <p>Get Policy</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+        <h3>PUT /darwin/policy/{object_id}/</h3>
+        <p>verb to create or update a specific policy based on its ID</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+        <h3>DELETE /darwin/policy/{object_id}/</h3>
+        <p>Delete a policy based on its ID</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+        <h3>POST /darwin/policy/{object_id}/{action}/</h3>
+        <p>Action on policy</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        <dt>action <span class="property-type"></span></dt>
+        </dl>
+        <h3>GET /system/config/</h3>
+        <p>Get Cluster configuration</p>
+        <dl class="message-properties">
+        </dl>
+        <h3>PUT /system/config/</h3>
+        <p>Edit Config</p>
+        <dl class="message-properties">
+        </dl>
+        <h3>POST /system/config/{list_type}/</h3>
+        <p>Define Packet Filter Whitelist or Blacklist</p>
+        <dl class="message-properties">
+        <dt>list_type <span class="property-type"></span></dt>
+        </dl>
+        <h3>GET /system/node/</h3>
+        <p>Get all nodes</p>
+        <dl class="message-properties">
+        </dl>
+        <h3>GET /system/node/{object_id}/</h3>
+        <p>Get one node</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+        <h3>POST /system/node/{object_id}/</h3>
+        <p>Update a node</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+        <h3>PUT /system/node/{object_id}/</h3>
+        <p>Update a node</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+        <h3>PATCH /system/node/{object_id}/</h3>
+        <p>Update a node</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+        <h3>GET /system/cluster/</h3>
+        <p>Cluster list</p>
+        <dl class="message-properties">
+        </dl>
+        <h3>GET /system/netif/</h3>
+        <p>List of all available network address cards</p>
+        <dl class="message-properties">
+        </dl>
+        <h3>POST /system/netif/refresh/</h3>
+        <p>Refresh list of network cards</p>
+        <dl class="message-properties">
+        </dl>
+        <h3>GET /system/netaddr/</h3>
+        <p>List of all network address</p>
+        <dl class="message-properties">
+        </dl>
+        <h3>GET /system/netaddr/{object_id}/</h3>
+        <p>Get one network address</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+        <h3>GET /system/pki/get_ca</h3>
+        <p>Get CA certificate</p>
+        <dl class="message-properties">
+        </dl>
+        <h3>GET /system/pki/get_cert</h3>
+        <p>Get certificate</p>
+        <dl class="message-properties">
+        </dl>
+        <h3>GET /system/tenants</h3>
+        <p>Multi tenants</p>
+        <dl class="message-properties">
+        </dl>
+        <h3>POST /system/tenants</h3>
+        <p>Create a tenant</p>
+        <dl class="message-properties">
+        </dl>
+        <h3>GET /system/tenants/{object_id}</h3>
+        <p>Multi tenants</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+        <h3>PUT /system/tenants/{object_id}</h3>
+        <p>Update a tenant</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+        <h3>DELETE /system/tenants/{object_id}</h3>
+        <p>Delete a tenant</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+        <h3>GET /system/vm/</h3>
+        <p>Virtual Machines</p>
+        <dl class="message-properties">
+        </dl>
+        <h3>GET /system/vm/{object_id}</h3>
+        <p>Virtual Machine</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+        <h3>GET /system/zfs/</h3>
+        <p>ZFS list</p>
+        <dl class="message-properties">
+        </dl>
+        <h3>GET /system/zfs/{object_id}</h3>
+        <p>ZFS</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+        <h3>POST /system/zfs/{object_id}/{action}</h3>
+        <p>Create ZFS</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        <dt>action <span class="property-type"></span></dt>
+        </dl>
+        <h3>GET /workflow/</h3>
+        <p>List of Workflow</p>
+        <dl class="message-properties">
+        </dl>
+        <h3>POST /workflow/</h3>
+        <p>Create a workflow</p>
+        <dl class="message-properties">
+        </dl>
+        <h3>GET /workflow/{object_id}</h3>
+        <p>Get a workflow configuration</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+        <h3>POST /workflow/{object_id}</h3>
+        <p>Edit a workflow</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+        <h3>DELETE /workflow/{object_id}</h3>
+        <p>Delete a workflow</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+        <h3>GET /authentication/idp/{object_id}</h3>
+        <p>List Groups/Users or Search Users</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        <dt>object_type <span class="property-type"></span></dt>
+        <dt>group_name <span class="property-type"></span></dt>
+        <dt>search <span class="property-type"></span></dt>
+        </dl>
+        <h3>POST /authentication/idp/users/{object_id}</h3>
+        <p>Create an user</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+        <h3>PUT /authentication/idp/users/{object_id}</h3>
+        <p>Edit an user</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+        <h3>DELETE /authentication/idp/users/{object_id}</h3>
+        <p>Delete an user</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+        <h3>POST /authentication/idp/groups/{object_id}</h3>
+        <p>Create a group</p>
+        <dl class="message-properties">
+        <dt>object_id <span class="property-type"></span></dt>
+        </dl>
+</script>
+<script type="text/javascript">
+    RED.nodes.registerType('vulture4-api-service', {
+        category: 'config',
+        defaults: {
+            host: { value: "", required: true },
+
+
+            name: { value: "" },
+        },
+        credentials: {
+            temp: { type: "text" }
+        },
+        label: function () {
+            return this.name || this.host;
+        },
+        labelStyle: function() {
+            return this.name?"node_label_italic":"";
+        },
+        oneditprepare: function () {
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="vulture4-api-service">
+    <div class="form-row">
+        <label for="node-config-input-host"><i class="fa fa-globe"></i> <span data-i18n="Vulture4Api.label.host"></span></label>
+        <input type="text" id="node-config-input-host" placeholder="http://localhost:1880">
+    </div>
+
+
+    <div class="form-row">
+        <label for="node-config-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+        <input type="text" id="node-config-input-name" data-i18n="[placeholder]node-red:common.label.name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="vulture4-api-service">
+    <p><b>Host</b>: URL to connect</p>
+
+</script>
